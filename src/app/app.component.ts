@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       city: ['', Validators.required],
       address: ['', Validators.required],
       contactNo: ['', Validators.required],
-      emailId: ['', Validators.required],
+      emailId: ['', [Validators.email, Validators.required]],
       pinCode: ['', Validators.required],
       state: ['', Validators.required],
     });
@@ -47,15 +47,19 @@ export class AppComponent implements OnInit {
   }
 
   createForm() {
+    const data: Employee = {
+      ...this.employeeForm.value,
+      empId:
+        this.editingEmployeeIndex !== null
+          ? this.employeeList[this.editingEmployeeIndex].empId
+          : this.employeeList.length + 1,
+    };
     if (this.employeeForm.valid) {
-      const data: Employee = {
-        empId: this.empIdCounter++,
-        ...this.employeeForm.value,
-      };
       if (this.editingEmployeeIndex !== null) {
         // jika sedang di edit
         this.employeeList[this.editingEmployeeIndex] = data;
       } else {
+        console.log('tidak di edit: ', this.editingEmployeeIndex);
         this.employeeList.push(data);
       }
       this.saveEmployees(); // Simpan data ke Local Storage
@@ -70,10 +74,6 @@ export class AppComponent implements OnInit {
   loadEmployees(): void {
     if (localStorage.getItem('employees') !== null) {
       this.employeeList = JSON.parse(localStorage.getItem('employees')!);
-      this.empIdCounter =
-        this.employeeList.length > 0
-          ? this.employeeList[this.employeeList.length - 1].empId++
-          : 0;
     }
   }
 
