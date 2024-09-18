@@ -1,3 +1,113 @@
-<button class="btn btn-primary">Primary</button>
-<button class="btn btn-warning">Warning</button>
-<button class="btn btn-danger">Danger</button>
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header text-bg-success">
+        <h6>Employee List</h6>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table border">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Name</th>
+                  <th>Contact No</th>
+                  <th>Email-Id</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(item of employeeList;track $index) {
+                <tr>
+                  <td>{{ item.empId }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.contactNo }}</td>
+                  <td>{{ item.emailId }}</td>
+                  <td>{{ item.city }}</td>
+                  <td>
+                    <button
+                      class="btn btn-success"
+                      (click)="onEdit(item, $index)"
+                    >
+                      Edit</button
+                    ><button class="btn btn-danger" (click)="onDelete($index)">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header text-bg-success">New Employee</div>
+      <div class="card-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="createForm()">
+          <div class="row">
+            <div class="col-12">
+              <label for="">Name</label>
+              <input formControlName="name" type="text" class="form-control" />
+            </div>
+            <div class="col-6">
+              <label for="">Email-id</label>
+              <input
+                formControlName="emailId"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Contact No</label>
+              <input
+                formControlName="contactNo"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <div class="col-md-9">
+              <label for="">City</label>
+              <input formControlName="city" type="text" class="form-control" />
+            </div>
+            <div class="col-6">
+              <label for="">State</label>
+              <input formControlName="state" type="text" class="form-control" />
+            </div>
+            <div class="col-6">
+              <label for="">Pin Code</label>
+              <input
+                formControlName="pinCode"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <div class="col-12">
+              <label for="">Address</label>
+              <textarea
+                formControlName="address"
+                class="form-control"
+              ></textarea>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6 text-center">
+              <button class="btn btn-secondary">Reset</button>
+            </div>
+            <div class="col-6 text-center">
+              <button class="btn btn-success" (click)="createForm()">
+                Save Employee
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-danger" (click)="clearStorage()">Clear Storage</button>
