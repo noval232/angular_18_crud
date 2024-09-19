@@ -9,11 +9,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { EmployeeServiceService } from './employee/employee-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule],
+  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit {
       if (this.editingEmployeeIndex !== null) {
         // jika sedang di edit
         this.employeeList[this.editingEmployeeIndex] = data;
+        this.editingEmployeeIndex = null;
       } else {
         console.log('tidak di edit: ', this.editingEmployeeIndex);
         this.employeeList.push(data);

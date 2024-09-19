@@ -99,8 +99,15 @@
               <button class="btn btn-secondary">Reset</button>
             </div>
             <div class="col-6 text-center">
-              <button class="btn btn-success" (click)="createForm()">
-                Save Employee
+              <button
+                [ngClass]="[
+                  editingEmployeeIndex !== null
+                    ? 'btn btn-warning'
+                    : 'btn btn-success'
+                ]"
+                (click)="createForm()"
+              >
+                {{ editingEmployeeIndex !== null ? "Update" : "Save" }}
               </button>
             </div>
           </div>
