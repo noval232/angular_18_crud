@@ -53,13 +53,13 @@ export class AppComponent implements OnInit {
       empId:
         this.editingEmployeeIndex !== null
           ? this.employeeList[this.editingEmployeeIndex].empId
-          : this.employeeList.length + 1,
+          : Math.max(...this.employeeList.map((emp) => emp.empId)) + 1,
     };
     if (this.employeeForm.valid) {
       if (this.editingEmployeeIndex !== null) {
         // jika sedang di edit
         this.employeeList[this.editingEmployeeIndex] = data;
-        // balikin button ke save setelah updated
+        // balikin button ke save setelah
         this.editingEmployeeIndex = null;
       } else {
         console.log('tidak di edit: ', this.editingEmployeeIndex);

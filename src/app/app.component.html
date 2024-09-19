@@ -15,6 +15,7 @@
                   <th>Contact No</th>
                   <th>Email-Id</th>
                   <th>City</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -31,7 +32,10 @@
                       (click)="onEdit(item, $index)"
                     >
                       Edit</button
-                    ><button class="btn btn-danger" (click)="onDelete($index)">
+                    ><button
+                      class="btn btn-danger ms-3"
+                      (click)="onDelete($index)"
+                    >
                       Delete
                     </button>
                   </td>
