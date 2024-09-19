@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
       if (this.editingEmployeeIndex !== null) {
         // jika sedang di edit
         this.employeeList[this.editingEmployeeIndex] = data;
+        // balikin button ke save setelah updated
         this.editingEmployeeIndex = null;
       } else {
         console.log('tidak di edit: ', this.editingEmployeeIndex);
