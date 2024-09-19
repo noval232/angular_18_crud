@@ -51,10 +51,13 @@ export class AppComponent implements OnInit {
     const data: Employee = {
       ...this.employeeForm.value,
       empId:
-        this.editingEmployeeIndex !== null
+        this.editingEmployeeIndex !== null && this.employeeList.length > 0
           ? this.employeeList[this.editingEmployeeIndex].empId
-          : Math.max(...this.employeeList.map((emp) => emp.empId)) + 1,
+          : this.employeeList.length > 0
+          ? Math.max(...this.employeeList.map((emp) => emp.empId)) + 1
+          : 1,
     };
+    console.log('default awal empId: ', this.employeeList);
     if (this.employeeForm.valid) {
       if (this.editingEmployeeIndex !== null) {
         // jika sedang di edit
