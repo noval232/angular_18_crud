@@ -51,11 +51,11 @@ export class AppComponent implements OnInit {
     const data: Employee = {
       ...this.employeeForm.value,
       empId:
-        this.editingEmployeeIndex !== null && this.employeeList.length > 0
+        this.employeeList.length > 0 && this.editingEmployeeIndex !== null
           ? this.employeeList[this.editingEmployeeIndex].empId
-          : this.employeeList.length > 0
-          ? Math.max(...this.employeeList.map((emp) => emp.empId)) + 1
-          : 1,
+          : this.employeeList.length < 1
+          ? 1
+          : Math.max(...this.employeeList.map((emp) => emp.empId)) + 1,
     };
     console.log('default awal empId: ', this.employeeList);
     if (this.employeeForm.valid) {
